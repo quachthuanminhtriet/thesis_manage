@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-q7z3_z&5#i2l+=fnbk5wc61cj@w$6o(-^=qk5@%ts97(770ip%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [127.0.0.1]
+ALLOWED_HOSTS = []
 
 from pathlib import Path
 import cloudinary

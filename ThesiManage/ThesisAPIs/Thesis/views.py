@@ -15,7 +15,8 @@ from .models import User, Department, Major, Ministry, Student, Lecturer, Thesis
 from .configs import MAX_LECTURER
 from django.conf import settings
 
-class UserViewSet(viewsets.ViewSet, generics.CreateAPIView, generics.ListAPIView):
+
+class UserViewSet(viewsets.ViewSet, generics.CreateAPIView):
     queryset = User.objects.filter(is_active=True)
     serializer_class = serializers.UserSerializer
     parser_classes = [parsers.MultiPartParser, ]
