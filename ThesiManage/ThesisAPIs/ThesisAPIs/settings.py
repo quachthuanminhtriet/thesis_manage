@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -25,7 +24,7 @@ SECRET_KEY = 'django-insecure-q7z3_z&5#i2l+=fnbk5wc61cj@w$6o(-^=qk5@%ts97(770ip%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [127.0.0.1]
 
 from pathlib import Path
 import cloudinary
@@ -48,6 +47,12 @@ INSTALLED_APPS = [
     'drf_yasg',
     'oauth2_provider'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    )
+}
 
 CKEDITOR_UPLOAD_PATH = "ckeditor/images/"
 
@@ -82,7 +87,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ThesisAPIs.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -125,7 +129,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -136,7 +139,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -154,3 +156,6 @@ EMAIL_HOST_PASSWORD = 'wkqd xqmn xsrp zlgo'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+CLIENT_ID = 'FLBWAUSqVbMRI6scKBIhAJCxKa1Rhdg1xGZwriY5'
+CLIENT_SECRET = 'YDqOZJXYhGhjlUJW5ukH3DBKV7rxfJ22zYhOzTfHCS5WxO3GLyapYuS2TbPv0s44Ocy5Kl7OshNE6bjb5mI6zF2sKyev8rRcvZwG95UOpIdHXMVza1RQZBJcefLW3Mfs'

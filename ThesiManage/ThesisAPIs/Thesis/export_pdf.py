@@ -2,6 +2,8 @@ from collections import defaultdict
 import datetime
 
 from _cffi_backend import buffer
+from django.conf import settings
+from django.core.mail import send_mail
 from django.db.models import Sum
 from reportlab.lib.enums import TA_CENTER
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
