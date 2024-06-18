@@ -1,0 +1,88 @@
+{% extends 'admin/base_site.html' %}
+
+{% block content %}
+<h1>THỐNG KÊ</h1>
+<div style="display: flex; flex-direction: row; width: 100%;">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>Mã</th>
+                <th>Tên chuyên ngành</th>
+                <th>Số lượng</th>
+                <th>Tỷ lệ phần trăm luận án</th>
+            <tr>
+            </thead>
+            <tbody>
+            {% for t in stats_major %}
+            <tr>
+                <td>{{t.students__major__code}}</td>
+                <td>{{t.students__major__name}}</td>
+                <td>{{t.total_count}}</td>
+                <td>{{t.percentage}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div style="min-width: 50%; margin-left: 20px">
+        <form>
+            <div>
+                <div>Năm</div>
+                <input type="number" min="1900" name="year" step="1"/>
+            </div>
+            <div>
+                <input type="submit" value="Lọc dữ liệu" class="btn btn-info"/>
+            </div>
+        </form>
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    let data = [];
+    let labels = [];
+    let backgroundColor = [];
+
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    {%for t in stats_major %}
+    labels.push('{{t.students__major__name}}');
+    data.push({{t.percentage}});
+    backgroundColor.push(getRandomColor());
+    {% endfor %}
+
+    window.onload = function () {
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Tần suất',
+                    data: data,
+                    borderWidth:  2,
+                    borderColor: 'black',
+                    backgroundColor: backgroundColor
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+</script>
+{% endblock %}
